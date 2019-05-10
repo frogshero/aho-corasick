@@ -256,7 +256,14 @@ public class Trie
         }
         this.failureStatesConstructed = true;
 
-        // 第二步，为深度 > 1 的节点建立failure表，这是一个bfs
+        // “从上往下”一层一层遍历树节点
+        // 把长分支的失败状态设置为短分支的节点，如abc的b的失效节点为bc的b，abcd的c为bcf的c
+        // 长分支的节点的emit设置为短分支的emit
+        // aabc，abc，bc： aabc的c失败状态为abc的c，abc的c失败状态为bc的c
+        // 由于abc的c为level3，先于aabc的c被处理，abc的c的emit先包括bc的c的emit
+        // aabc的c最后处理，最终aabc的c有3个emit也就是说匹配aabc也就匹配到abc，bc
+
+        //连续成功节点的连续失败节点就是其全部或部分“子串关键字”，如abc和bc，如abc和bcd
         while (!queue.isEmpty())
         {
             State currentState = queue.remove();
