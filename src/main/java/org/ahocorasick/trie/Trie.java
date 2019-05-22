@@ -261,7 +261,8 @@ public class Trie
         // 长分支的节点的emit设置为短分支的emit
         // aabc，abc，bc： aabc的c失败状态为abc的c，abc的c失败状态为bc的c
         // 由于abc的c为level3，先于aabc的c被处理，abc的c的emit先包括bc的c的emit
-        // aabc的c最后处理，最终aabc的c有3个emit也就是说匹配aabc也就匹配到abc，bc
+        // aabc的c最后处理，最终aabc的c有3个emit也就是说匹配aabc也就匹配到abc，bc.完成子关键字匹配。
+        // 短串关键字实际已经合并到长串关键字,不需要跳转
 
         //连续成功节点的连续失败节点就是其全部或部分“子串关键字”，如abc和bc，如abc和bcd
         while (!queue.isEmpty())
