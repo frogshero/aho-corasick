@@ -43,9 +43,13 @@ public class KMPTest {
         }
       } else {
         j = patternArr[j];
+        if (j == 0) {
+          //等于0就是从头开始匹配
+          i++;
+        }
       }
     }
-    return 0;
+    return -1;
   }
 
   //复杂度为最坏O(n*n*n)，最好O(n*n)
@@ -79,7 +83,7 @@ public class KMPTest {
 
   @Test
   public void test() {
-    System.out.println(search("abcabe" + PATTERN, PATTERN));
+    System.out.println(search("abcabe" + PATTERN, "caa"));
     //System.out.println(Arrays.toString(getPatternArr(PATTERN)));
   }
 }
